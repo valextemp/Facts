@@ -1,4 +1,5 @@
 using Calabonga.Facts.Web.Data;
+using Calabonga.Facts.Web.Infrastruture.Mappers.Base;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -24,6 +25,8 @@ namespace Calabonga.Facts.Web
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            MapperRegistration.GetMapperConfiguration(); //Это просто конфигурация для Automapper и она не регистрирует профили
 
             var app = builder.Build();
 

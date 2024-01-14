@@ -1,4 +1,4 @@
-﻿using Calabonga.Facts.Web.Models;
+﻿using Calabonga.Facts.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
