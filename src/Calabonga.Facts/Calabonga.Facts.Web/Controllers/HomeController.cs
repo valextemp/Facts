@@ -1,4 +1,5 @@
-﻿using Calabonga.Facts.Web.ViewModels;
+﻿using Calabonga.Facts.Web.Data;
+using Calabonga.Facts.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,8 +14,21 @@ namespace Calabonga.Facts.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromServices]ApplicationDbContext context)
         {
+            using var tran=context.Database.BeginTransaction();
+
+            var fact = new Fact() { Content="Fact 2",CreatedBy="Valex"};
+            context.Facts.Add(fact);
+            context.SaveChanges();
+
+            if (context.SaveChangesResult.IsOk)
+            {
+                tran.Commit();
+                return View(fact);
+            }
+
+            tran.Rollback();
             return View();
         }
 

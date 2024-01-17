@@ -12,7 +12,7 @@ namespace Calabonga.Facts.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //Добавляю Serilog
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Serilog
             builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
             // Add services to the container.
@@ -26,7 +26,7 @@ namespace Calabonga.Facts.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
-            MapperRegistration.GetMapperConfiguration(); //Это просто конфигурация для Automapper и она не регистрирует профили
+            MapperRegistration.GetMapperConfiguration(); //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Automapper пїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
             var app = builder.Build();
 
@@ -45,7 +45,7 @@ namespace Calabonga.Facts.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            // Добовляю Serilog в PipeLine
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ Serilog пїЅ PipeLine
             app.UseSerilogRequestLogging();
 
             app.UseRouting();
@@ -57,7 +57,7 @@ namespace Calabonga.Facts.Web
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
 
-            //Первоначальная инициализация данными БД FactsDb
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ FactsDb
             using (var scope = app.Services.CreateScope())
             {
                 await DataInitialaizer.InitializeAsync(scope.ServiceProvider);

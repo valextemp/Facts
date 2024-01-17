@@ -1,24 +1,23 @@
-﻿using Calabonga.Facts.Web.Data.Configurations;
+﻿using Calabonga.EntityFrameworkCore.Entities.Base;
+using Calabonga.Facts.Web.Data.Base;
+using Calabonga.Facts.Web.Data.Configurations;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 
 namespace Calabonga.Facts.Web.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : DbContextBase
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-            builder.ApplyConfigurationsFromAssembly(typeof(Program).Assembly); //сработала
+        public DbSet<Fact> Facts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
-            //builder.ApplyConfiguration(new FactModelConfiguration());
-            //builder.ApplyConfiguration(new TagModelConfiguration());
-        }
     }
+
+
 }
