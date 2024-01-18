@@ -54,9 +54,9 @@ namespace Calabonga.Facts.Web.Data.Base
             var addedEntities = ChangeTracker.Entries().Where(x => x.State == EntityState.Added);
             foreach (var entry in addedEntities)
             {
-                if (entry.Entity is not IAuditable)
+                if (entry.Entity is IAuditable)
                 {
-                    return;
+                    continue;
                 }
                 var createdAt = entry.Property(nameof(IAuditable.CreatedAt)).CurrentValue;
                 var updatedAt = entry.Property(nameof(IAuditable.UpdatedAt)).CurrentValue;

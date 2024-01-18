@@ -18,14 +18,18 @@ namespace Calabonga.Facts.Web.Controllers
         {
             using var tran=context.Database.BeginTransaction();
 
-            var fact = new Fact() { Content="Fact 2",CreatedBy="Valex"};
-            context.Facts.Add(fact);
+            //var fact = new Fact() { Content="Fact 2",CreatedBy="Valex"};
+            var fact1=new Fact() {Content="fact77", Tags = new List<Tag>() { new Tag() { Name = "tag1" }, new() { Name = "tag2" } } };
+            var fact2 = new Fact() { Content = "fact88", Tags = new List<Tag>() { new Tag() { Name = "tag3" }, new() { Name = "tag4" } } };
+
+            context.AddRange(fact1, fact2);
+            //context.Facts.Add(fact);
             context.SaveChanges();
 
             if (context.SaveChangesResult.IsOk)
             {
                 tran.Commit();
-                return View(fact);
+                return View();
             }
 
             tran.Rollback();
